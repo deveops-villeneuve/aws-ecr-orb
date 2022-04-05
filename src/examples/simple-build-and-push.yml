@@ -4,7 +4,7 @@ usage:
   version: 2.1
 
   orbs:
-    aws-ecr: circleci/aws-ecr@x.y
+    ville: ville/aws-ecr-orb@8.1.1
 
   workflows:
     build_and_push_image:
@@ -15,16 +15,16 @@ usage:
             executor: aws-ecr/default
 
             # name of your ECR repository
-            repo: myECRRepository
+            repo: dkr.ecr.eu-west-1.amazonaws.com/decision-credit-development
 
             # set this to true to create the repository if it does not already exist, defaults to "false"
-            create-repo: true
+            create-repo: false
 
             # required if any necessary secrets are stored via Contexts
-            context: myContext
+            context: decision_credit_ci_cd
 
             # AWS profile name, defaults to "default"
-            profile-name: myProfileName
+            profile-name: default
 
             # name of env var storing your AWS Access Key ID, defaults to AWS_ACCESS_KEY_ID
             aws-access-key-id: ACCESS_KEY_ID_ENV_VAR_NAME
@@ -33,13 +33,13 @@ usage:
             aws-secret-access-key: SECRET_ACCESS_KEY_ENV_VAR_NAME
 
             # Name of new profile associated with role arn.
-            new-profile-name: newProfileName
+            # new-profile-name: newProfileName
 
             # Source profile containing credentials to assume the role with role-arn.
-            source-profile: sourceProfileName
+            # source-profile: sourceProfileName
 
             # Role ARN that new profile should take
-            role-arn: arn:aws:iam::123456789012:role/testing
+            # role-arn: arn:aws:iam::123456789012:role/testing
 
             #Your AWS region
             region: AWS_REGION
@@ -51,10 +51,10 @@ usage:
             tag: latest,myECRRepoTag
 
             # name of Dockerfile to use, defaults to "Dockerfile"
-            dockerfile: myDockerfile
+            dockerfile: Dockerfile
 
             # path to Dockerfile, defaults to . (working directory)
-            path: pathToMyDockerfile
+            path: .
 
             # Select a specific version of the AWS v2 CLI. By default the latest version will be used.
             aws-cli-version: latest
